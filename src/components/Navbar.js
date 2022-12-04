@@ -8,12 +8,15 @@ function Navbar() {
     };
   }
   return (
-    <nav>
+    <nav className="primary-nav">
       <NavLink to="/" style={NavBarStyles}>
         Home
       </NavLink>
       <NavLink to="/about" style={NavBarStyles}>
         About
+      </NavLink>
+      <NavLink to="/products" style={NavBarStyles}>
+        Products
       </NavLink>
     </nav>
   );

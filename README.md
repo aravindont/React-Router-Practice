@@ -209,3 +209,114 @@ export default NoMatch;
 ````
 
 - Here '\*' has the special meaning this route will match only when no routes match
+
+## Nested Routes
+
+- Nested routers helps nest the Route paths inside the main Route
+
+for example create `products.js` file inside the components folder and create `Route` for it inside the `App.js` file and also create the `NavLink` for products page. when anybody clicks on it user will be taken to products page inside it we need to create two more nav links namely `FeaturedProducts` and `NewProducts` first we need to create these two components and after that we will nest these two links inside the `products` route that we created
+
+- products.js file
+
+```javascript
+import { Link } from "react-router-dom";
+
+function Products() {
+  return (
+    <>
+      <div>
+        <input type="search" placeholder="search here" />
+      </div>
+      <nav>
+        <Link to="featured">Featured</Link>
+        <Link to="new">New</Link>
+      </nav>
+    </>
+  );
+}
+export default Products;
+```
+
+- FeaturedProducts.js
+
+```javascript
+function FeaturedProducts() {
+  return (
+    <>
+      <div>Featured products list</div>
+    </>
+  );
+}
+export default FeaturedProducts;
+```
+
+- NewProducts.js
+
+```javascript
+function NewProducts() {
+  return (
+    <>
+      <div>New Products</div>
+    </>
+  );
+}
+export default NewProducts;
+```
+
+- Routes added inside `App.js` are below
+
+```javascript
+<Route path="products" element={<Products />}>
+  <Route path="featured" element={<FeaturedProducts />} />
+  <Route path="new" element={<NewProducts />} />
+</Route>
+```
+
+-Also added `NavLink` for `products` page as below
+
+```javascript
+<NavLink to="/products" style={NavBarStyles}>
+  Products
+</NavLink>
+```
+
+- Output in local host
+
+![nested-router](./images/nested-routes.PNG)
+
+## Index Routes
+
+- When we want to display the contents of the child Routes inside the parent Route index routes will come handy
+
+- To create Index Routes we need to add `index` prop to Route change in `App.js` file like as shown below
+
+```javascript
+<Route index element={<FeaturedProducts />} />
+```
+
+## Dynamic Routes
+
+- For example if we have Users list and we want to display user details on specific path then dynamic routes come into picture
+
+- Dynamic routes are `:` prefixed so that we can mention whatever after the parent component
+
+- Dynamic Routes look like below
+
+```javascript
+<Route path="users" element={<User />} />
+<Route path="users/:userId" element={<UserDetails />} />
+<Route path="users/admin" element={<Admin />} />
+```
+
+- Dynamic Routes can be nested as well like below
+
+```javascript
+<Route path="users" element={<User />}>
+  <Route path=":userId" element={<UserDetails />} />
+  <Route path="admin" element={<Admin />} />
+</Route>
+```
+
+- If your using Nested routing always import `Outlet` component inside parent component
+
+## URL Params

@@ -8,6 +8,10 @@ nav a {
   padding: 1rem;
   color: #fff;
 }
+
+.products-nav {
+  background-color: coral;
+}
 /* nav a.active {
   font-weight: bold;
   text-decoration: none;
