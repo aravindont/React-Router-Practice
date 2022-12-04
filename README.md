@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# React-Router
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React Router Helps for client side routing
 
-## Available Scripts
+## Basic Routing
 
-In the project directory, you can run:
+**components used**
 
-### `npm start`
+- first import `BrowserRouter` component inside `index.js` file
+- wrap `<App />` component around `BrowserRouter` component that we imported
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```javascript
+<BrowserRouter>
+  <App />
+</BrowserRouter>
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+To specify routing paths
 
-### `npm test`
+- import Routes,Route components from `react-router-dom`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Inside the Routes component specify your routes
 
-### `npm run build`
+```javascript
+function App() {
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="about" element={<About />}></Route>
+      </Routes>
+    </div>
+  );
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- In the above code `path` prop tells us in which path we need to render a component specified inside the `element` prop
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- For example in my case i gave 2 paths `/` is kind of `home` route and `about` route is to display about page
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## React Router Links
 
-### `npm run eject`
+In the above example for navigating to different routes we manualy typed the path name and navigated there. So you might have observed in so many websites we have links to move around in this section we are gone be seeing the same.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- import `Link` component inside your file. `Link` component is similar to `a`(anchor) tag in plain html
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+import { Link } from "react-router-dom";
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function Navbar() {
+  return (
+    <nav>
+      <Link to="/">Home</Link>
+      <Link to="/about">About</Link>
+    </nav>
+  );
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+export default Navbar;
+```
 
-## Learn More
+Add the below style inside `index.js`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```css
+nav {
+  background-color: #171111;
+  padding: 2rem;
+}
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+nav a {
+  font-size: 2rem;
+  text-decoration: none;
+  padding: 1rem;
+  color: #fff;
+}
+```
 
-### Code Splitting
+- You will see below output
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![links-output](./images/Links.PNG)
