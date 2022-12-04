@@ -5,7 +5,10 @@ nav {
 
 nav a {
   font-size: 2rem;
-  text-decoration: none;
   padding: 1rem;
   color: #fff;
 }
+/* nav a.active {
+  font-weight: bold;
+  text-decoration: none;
+} */
