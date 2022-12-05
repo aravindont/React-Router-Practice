@@ -320,3 +320,100 @@ export default NewProducts;
 - If your using Nested routing always import `Outlet` component inside parent component
 
 ## URL Params
+
+In the above concept of Dynamic routing we passed params dynamically to get the specific user details in that specific endpoint to access that parameter that is passed dynamically and display on to the screen we can use the Hook called `useParams` provided by the `react-router-dom`
+
+changes made in the `UserDetails.js` file
+
+```javascript
+import { useParams } from "react-router-dom";
+
+function UserDetails() {
+  const params = useParams();
+  const { userId } = params;
+  return <div>Details About User {userId}</div>;
+}
+export default UserDetails;
+```
+
+ouput shows whenever we give different `userId` in the URL it displays that userId on the screen in the below image i gave 101 as the userId it is shown on the screen.
+
+![useParams](./images/useParams.PNG)
+
+## Search Params
+
+In the previous section you have seen how to add dynamic routes and how to get those dynamic routes and display on the page
+
+In this section let us see how we can add params dynamically using `useSearchParams()` hook this hook is similar `useState` hook from ReactJS
+
+In the below code I used `searchParams` and `setSearchParams` keywords to store returned value from `useSearchParams()` hook
+
+```javascript
+import { Link, Outlet, useSearchParams } from "react-router-dom";
+
+function User() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const showActiveUsers = searchParams.get("filter") === "active";
+  return (
+    <>
+      <Link to="user1">User 1</Link>
+      <h2>User 2</h2>
+      <h2>User 3</h2>
+      <Outlet />
+      <div>
+        <button onClick={() => setSearchParams({ filter: "active" })}>
+          Active Users
+        </button>
+        <button onClick={() => setSearchParams({})}>Reset Filter</button>
+      </div>
+      {showActiveUsers ? (
+        <h2>Showing active users</h2>
+      ) : (
+        <h2>Showing all users</h2>
+      )}
+    </>
+  );
+}
+export default User;
+```
+
+## Authentication and Protected Routes
+
+- create `Profile.js` component
+
+```javascript
+function Profile() {
+  return <div>Profile page</div>;
+}
+export default Profile;
+```
+
+- Add the below `NavLink` in the `Navbar.js`
+
+```javascript
+<NavLink to="/profile" style={NavBarStyles}>
+  Profile
+</NavLink>
+```
+
+- In the `App.js` congifure the new Route
+
+```javascript
+<Route path="profile" element={<Profile />} />
+```
+
+- When we click on `Profile` link here is the output
+
+![profile-NavLink](./images/Profile-Auth.PNG)
+
+- But we want to make this `profile` route to be protected route this should be accessible only when user is logged in.
+
+- create `auth.js` file inside components within this we will create `auth` context
+
+```javascript
+
+```
+
+- In the `app.js` file we need to wrap entire component `<AuthProvider/>`
+
+- In the compoents folder create `Login.js` file
